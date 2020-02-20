@@ -52,4 +52,4 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
                     horizontalalignment="center",
                     color = "white" if val > thresh else "black")
                     
-    plt.colorbar();
+    plt.colorbar()
