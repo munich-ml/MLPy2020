@@ -10,6 +10,29 @@ import matplotlib.pyplot as plt
 
 
 def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diagonal=False):
+    """
+    plots a confusion matrix using matplotlib
+
+    Parameters
+    ----------
+    cm : (tensor or numpy array)
+        confusion matrix
+        e.g. from tf.math.confusion_matrix(y_test, y_pred)
+    xticks : (list)
+        x tick labels
+    yticks : (list)
+        x tick labels
+    normalize : (bool), optional
+        scales cm to 1. The default is False.
+    ignore_main_diagonal : (bool), optional
+        sets the main diagonal to zero. The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
+    
     cm = np.array(cm)
     if normalize:   # normalize to 1.0
         cm = cm / cm.max()
