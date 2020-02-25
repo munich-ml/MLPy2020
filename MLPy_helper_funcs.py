@@ -58,31 +58,63 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
     
 def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test, 
                              n_cols=10):
+    """
+    plots predictions examples in 4 rows from 'true positives' till 'false negatives'
+
+    Parameters
+    ----------
+    test_class : TYPE
+        DESCRIPTION.
+    class_names : TYPE
+        DESCRIPTION.
+    y_pred : np.array
+        predicted classes
+    y_test : np.array
+        true / actual classes
+    X_test : np.array
+        array of images
+    n_cols : int, optional
+        Number of columns / number of images per row. The default is 10.
+
+    Returns
+    -------
+    None.
+
+    """
     
     print("Evaluating examples of test_class={}, '{}'".format(test_class, 
                                                               class_names[test_class]))
     
-    # step 1: seperating right and wrong examples
-    pred_right = []
-    pred_wrong = []
-    for i, (val_test, val_pred) in enumerate(zip(y_pred, y_test)):
+    # step 1: Compute TP, TN, FP, FN
+    preds = {"true pos": [],
+             "true neg": [],
+             "false pos": [],
+             "false neg": []}
+
+    for i, (val_test, val_pred) in enumerate(zip(y_test, y_pred)):
         if val_test == test_class:
-            if val_test == val_pred:
-                pred_right.append((i, val_pred))
+            if val_pred == test_class:
+                preds["true pos"].append((i, val_test, val_pred))
             else:
-                pred_wrong.append((i, val_pred))
-    
-    print("Classified right: {} images".format(len(pred_right)))
-    print("Classified wrong: {} images".format(len(pred_wrong)))
+                preds["false neg"].append((i, val_test, val_pred))
+        else:
+            if val_pred == test_class:
+                preds["false pos"].append((i, val_test, val_pred))
+            else:
+                preds["true neg"].append((i, val_test, val_pred))
+
+    for key, val in preds.items():
+        print("{}: {} images".format(key, len(val)))
     
     # step 2: plotting random examples of right and wrong predictions
-    plt.figure(figsize=(n_cols*1.3, 4))
-    for row, predictions in enumerate([pred_right, pred_wrong]):
+    plt.figure(figsize=(n_cols*2, 10))
+    for row, predictions in enumerate(preds.values()):
         for col, idx in enumerate(np.random.randint(0, len(predictions), n_cols)):
-            i, pred_val = predictions[idx]
-            plt.subplot(2, n_cols, n_cols*row+col+1)
+            i, val_test, val_pred = predictions[idx]
+            plt.subplot(len(preds), n_cols, n_cols*row+col+1)
             plt.imshow(X_test[i], cmap="binary")
             plt.axis('off')
-            plt.title(class_names[pred_val], fontsize=12)
+            title = "\nimage:{}\nact: {}\nprd: {}".format(i, class_names[val_test], class_names[val_pred])
+            plt.title(title, fontsize=11)
     plt.tight_layout()
     plt.show()
