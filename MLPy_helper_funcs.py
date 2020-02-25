@@ -104,10 +104,10 @@ def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test,
                 preds["true neg"].append((i, val_test, val_pred))
 
     for key, val in preds.items():
-        print("{}: {} images".format(key, len(val)))
+        print("- {}: {} images".format(key, len(val)))
     
     # step 2: plotting random examples of right and wrong predictions
-    plt.figure(figsize=(n_cols*2, 10))
+    plt.figure(figsize=(n_cols*1.8, 9))
     for row, predictions in enumerate(preds.values()):
         for col, idx in enumerate(np.random.randint(0, len(predictions), n_cols)):
             i, val_test, val_pred = predictions[idx]
