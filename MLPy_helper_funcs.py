@@ -112,7 +112,7 @@ def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test,
         for col, idx in enumerate(np.random.randint(0, len(predictions), n_cols)):
             i, val_test, val_pred = predictions[idx]
             plt.subplot(len(preds), n_cols, n_cols*row+col+1)
-            plt.imshow(X_test[i], cmap="binary")
+            plt.imshow(np.squeeze(X_test[i]), cmap="binary")
             plt.axis('off')
             title = "\nimage:{}\nact: {}\nprd: {}".format(i, class_names[val_test], class_names[val_pred])
             plt.title(title, fontsize=11)
