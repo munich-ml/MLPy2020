@@ -6,6 +6,7 @@ Created on Sat Jan 18 13:04:44 2020
 """
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -55,11 +56,10 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
     plt.colorbar()
     
     
-    
 def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test, 
                              n_cols=10):
     """
-    plots predictions examples in 4 rows from 'true positives' till 'false negatives'
+    plots images of predictions examples in 4 rows from 'true positives' till 'false negatives'
 
     Parameters
     ----------
@@ -118,3 +118,58 @@ def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test,
             plt.title(title, fontsize=11)
     plt.tight_layout()
     plt.show()
+
+
+def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4]):
+    """
+    Parameters
+    ----------
+    df : Pandas DataFrame
+        Data
+    x_column : str
+        column to plot on x
+    y_column : str
+        column to plot on y
+    bins : int, optional
+        Number of histogram bins. The default is 15.
+    levels : int, optional
+        Number of contour levels. The default is 20.
+    figsize : tuple or list, optional
+        The default is [13, 4].
+
+    Returns
+    -------
+    None
+
+    """
+    x = df[x_column]
+    y = df[y_column]
+    fig = plt.figure(figsize=figsize) 
+    axes = fig.subplots(nrows=1, ncols=2)
+    cnts, h2x, h2y, img = axes[0].hist2d(x, y, bins=bins, cmap=plt.cm.coolwarm,
+                                         range=([x.min(), x.max()], [y.min(), y.max()]))
+    axes[0].set_title("hist2d heatmap")
+
+    def edges2centers(edges):
+        return (edges[1:] + edges[:-1]) / 2
+
+    axes[1].contourf(edges2centers(h2x), edges2centers(h2y), cnts.T, levels=levels, 
+                     cmap=plt.cm.coolwarm)
+    axes[1].set_title("contour plot")
+
+    for ax in axes:
+        ax.grid(which="both")
+        ax.set_xlabel(x_column)
+        ax.set_ylabel(y_column)
+        fig.colorbar(img, ax=ax)
+    
+    fig.tight_layout()
+    
+
+if __name__ == "__main__":
+    # Test plot_hist_2D
+    x = np.random.beta(a=2, b=5, size=10000)
+    y = np.random.beta(a=1.5, b=3, size=10000)
+    df = pd.DataFrame(np.column_stack([x, x+y]), columns=["x", "y"])
+    plot_hist_2D(df, "x", "y", bins=20)
+    
