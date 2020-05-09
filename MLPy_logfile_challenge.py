@@ -47,7 +47,7 @@ def create_csv(plot=False):
     signals = [x]
 
     for i, (sig_period, cal_factor) in enumerate(zip([6, 8, 10], cal_factors)):
-        signal = 10 * np.sin(2*np.pi* x / sig_period)
+        signal = 10 * (1 - np.cos(2*np.pi* x / sig_period))
         signals.append(signal / cal_factor)
         if plot:
             plt.plot(x, signal, "x", label="sig"+str(i))
