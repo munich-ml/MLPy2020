@@ -31,7 +31,7 @@ def create_csv(plot=False):
     
     for i, cal_factor in enumerate(cal_factors):
         if cal_factor != 1:
-            header["calibration factor s{}".format(i)] = cal_factor
+            header["calibration factor sig{}".format(i)] = cal_factor
     
     s = "MLPy2020 logfile challenge"
     
