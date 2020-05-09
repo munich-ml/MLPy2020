@@ -34,8 +34,9 @@ def create_csv(plot=False):
         if cal_factor != 1:
             header["calibration factor s{}".format(i)] = cal_factor
     
-    s = "MLPy2020 logfile challenge\n"
+    s = "MLPy2020 logfile challenge"
     
+    s += "\n\nheader"
     for key, value in header.items():
         s += "\n" + string(key) + "," + string(value)
     
