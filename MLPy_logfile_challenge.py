@@ -15,13 +15,12 @@ def create_csv(plot=False):
     
     def string(x, make_ohms=False):
         if type(x) in (float, np.float64):
-            if(abs(x) < 1):
-                return "{:.0f} mOhms".format(1000*x)
-            return "{:.2f} Ohms".format(x)
-            
-        else:
-            s = str(x)
-        return s.replace(",", "_")
+            if make_ohms:
+                if(abs(x) < 1):
+                    return "{:.0f} mOhms".format(1000*x)
+                return "{:.2f} Ohms".format(x)
+            return "{:.2f}".format(x)
+        return str(x).replace(",", "_")
     
     
     # Create header
@@ -61,7 +60,8 @@ def create_csv(plot=False):
     for values in zip(*signals):
         newline = "\n"
         for val in values:
-            newline += string(val) + ","
+            make_ohms = val != values[0]
+            newline += string(val, make_ohms) + ","
         s += newline[:-1]
     
     with open("logfile.csv", "w") as file:
