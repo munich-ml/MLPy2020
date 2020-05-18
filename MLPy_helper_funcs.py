@@ -5,9 +5,76 @@ Created on Sat Jan 18 13:04:44 2020
 @author: holge
 """
 
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import datetime as dt
+
+def create_csv(plot=False):
+    """
+    creates a "logfile.csv" in the datasets subdir to be used in the logfile challenge.
+    """
+    np.random.seed(23)
+    
+    def string(x, make_ohms=False):
+        if type(x) in (float, np.float64):
+            if make_ohms:
+                if(abs(x) < 1):
+                    return "{:.0f} mOhms".format(1000*x)
+                return "{:.2f} Ohms".format(x)
+            return "{:.2f}".format(x)
+        return str(x).replace(",", "_")
+    
+    
+    # Create header
+    cal_factors = [0.55, 1, 1.88]
+    
+    header = {"measurement date": dt.date(2020, 5, 6),
+              "measurement time": dt.time(8, 0, 0)}
+    
+    for i, cal_factor in enumerate(cal_factors):
+        if cal_factor != 1:
+            header["calibration factor sig{}".format(i)] = cal_factor
+    
+    s = "MLPy2020 logfile challenge"
+    
+    s += "\n\nheader"
+    for key, value in header.items():
+        s += "\n" + string(key) + "," + string(value)
+    
+    # Create content
+    s += "\n\nmeasurements"
+    s += "\nx,sig0,sig1,sig2"
+    
+    x = 10 * np.random.rand(30)    # sig x-axis
+    signals = [x]
+
+    for i, (sig_period, cal_factor) in enumerate(zip([6, 8, 10], cal_factors)):
+        signal = 10 * (1 - np.cos(2*np.pi* x / sig_period))
+        signals.append(signal / cal_factor)
+        if plot:
+            plt.plot(x, signal, "x", label="sig"+str(i))
+    
+    if plot:
+        plt.xlabel("x"), plt.ylabel("sig [ohms]")
+        plt.grid(), plt.legend()
+
+    # write lines
+    for values in zip(*signals):
+        newline = "\n"
+        for val in values:
+            make_ohms = val != values[0]
+            newline += string(val, make_ohms) + ","
+        s += newline[:-1]
+    
+    # store file to datasets folder
+    folder_name = "datasets"
+    if folder_name not in os.listdir():
+        os.mkdir(folder_name)
+
+    with open(os.path.join(folder_name, "logfile.csv"), "w") as file:
+        file.write(s)
 
 
 def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diagonal=False):
@@ -167,6 +234,9 @@ def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4]):
     
 
 if __name__ == "__main__":
+    # logfile challenge, create csv
+    create_csv()
+
     # Test plot_hist_2D
     x = np.random.beta(a=2, b=5, size=10000)
     y = np.random.beta(a=1.5, b=3, size=10000)
