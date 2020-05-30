@@ -150,7 +150,7 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
     if ignore_main_diagonal:  # set main diagonal to zero
         for i in range(len(cm)):
             cm[i, i] = 0
-    plt.imshow(cm, cmap="binary")
+    plt.imshow(cm, cmap=plt.cm.cool)
     plt.xticks(ticks=range(len(xticks)), labels=xticks, rotation=90)
     plt.yticks(ticks=range(len(yticks)), labels=yticks)
     plt.xlabel("predicted class")
