@@ -120,7 +120,8 @@ def create_csv(plot=False):
         file.write(s)
 
 
-def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diagonal=False):
+def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diagonal=False, 
+                          cmap=plt.cm.binary):
     """
     plots a confusion matrix using matplotlib
 
@@ -137,6 +138,8 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
         scales cm to 1. The default is False.
     ignore_main_diagonal : (bool), optional
         sets the main diagonal to zero. The default is False.
+    cmap : matplotlib colormap, optional
+        
 
     Returns
     -------
@@ -150,7 +153,7 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
     if ignore_main_diagonal:  # set main diagonal to zero
         for i in range(len(cm)):
             cm[i, i] = 0
-    plt.imshow(cm, cmap=plt.cm.cool)
+    plt.imshow(cm, cmap=cmap)
     plt.xticks(ticks=range(len(xticks)), labels=xticks, rotation=90)
     plt.yticks(ticks=range(len(yticks)), labels=yticks)
     plt.xlabel("predicted class")
@@ -167,7 +170,7 @@ def plot_confusion_matrix(cm, xticks, yticks, normalize=False, ignore_main_diago
     
     
 def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test, 
-                             n_cols=10):
+                             n_cols=10, cmap=plt.cm.binary):
     """
     plots images of predictions examples in 4 rows from 'true positives' till 'false negatives'
 
@@ -185,6 +188,7 @@ def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test,
         array of images
     n_cols : int, optional
         Number of columns / number of images per row. The default is 10.
+    cmap : matplotlib colormap, optional
 
     Returns
     -------
@@ -222,7 +226,7 @@ def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test,
         for col, idx in enumerate(np.random.randint(0, len(predictions), n_cols)):
             i, val_test, val_pred = predictions[idx]
             plt.subplot(len(preds), n_cols, n_cols*row+col+1)
-            plt.imshow(np.squeeze(X_test[i]), cmap="binary")
+            plt.imshow(np.squeeze(X_test[i]), cmap=cmap)
             plt.axis('off')
             title = "\nimage:{}\nact: {}\nprd: {}".format(i, class_names[val_test], class_names[val_pred])
             plt.title(title, fontsize=11)
@@ -230,7 +234,7 @@ def plot_prediction_examples(test_class, class_names, y_pred, y_test, X_test,
     plt.show()
 
 
-def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4]):
+def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4], cmap=plt.cm.coolwarm):
     """
     Parameters
     ----------
@@ -246,6 +250,7 @@ def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4]):
         Number of contour levels. The default is 20.
     figsize : tuple or list, optional
         The default is [13, 4].
+    cmap : matplotlib colormap, optional
 
     Returns
     -------
@@ -256,7 +261,7 @@ def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4]):
     y = df[y_column]
     fig = plt.figure(figsize=figsize) 
     axes = fig.subplots(nrows=1, ncols=2)
-    cnts, h2x, h2y, img = axes[0].hist2d(x, y, bins=bins, cmap=plt.cm.coolwarm,
+    cnts, h2x, h2y, img = axes[0].hist2d(x, y, bins=bins, cmap=cmap,
                                          range=([x.min(), x.max()], [y.min(), y.max()]))
     axes[0].set_title("hist2d heatmap")
 
@@ -264,7 +269,7 @@ def plot_hist_2D(df, x_column, y_column, bins=15, levels=20, figsize=[13, 4]):
         return (edges[1:] + edges[:-1]) / 2
 
     axes[1].contourf(edges2centers(h2x), edges2centers(h2y), cnts.T, levels=levels, 
-                     cmap=plt.cm.coolwarm)
+                     cmap=cmap)
     axes[1].set_title("contour plot")
 
     for ax in axes:
