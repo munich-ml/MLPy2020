@@ -6,11 +6,69 @@ Created on Sat Jan 18 13:04:44 2020
 """
 
 import os
+import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime as dt
 
+
+def pickle_in(filename, scope):
+    """
+    Pickles in variables from file and adds them to the scope.  
+    
+    Example usage:
+        pickle_in("fn.pkl", locals())
+
+    Parameters:
+        filename : str
+    
+        scope : dict
+            usually locals(), globals() works, too
+
+    Returns:
+        None
+    """
+    with open(filename, 'rb') as file:
+        d = pickle.load(file)
+        print("pickle_in: Updating scope with the following variables:")
+        print(list(d.keys()))
+        scope.update(d)
+
+
+def pickle_out(filename, scope, *variables):
+    """
+    Pickles out all *variables (including their names) 
+    You are required to put a scope e.g. locals() as argument.
+    
+    Example usage:
+        pickle_out("fn.pkl", locals(), X_test, y_test)
+
+    Parameters:
+        filename : str
+    
+        scope : dict
+            usually locals(), globals() works, too
+            
+        *variables : all types that can be pickled
+            the variables to be pickled
+
+    Returns
+        None
+    """
+    # step 1: Create a dict of vars to be pickled out
+    #         The names are gathered from the scope (e.g. locals())
+    d = dict()
+    for name, val in scope.items():
+        for var in variables:
+            if var is val:
+                d[name] = val
+    
+    # step 2: dump to file    
+    with open(filename, 'wb') as file:
+        pickle.dump(d, file)
+        
+        
 def parse_logfile_string(s):
     # split the input string on "\n" new line
     lines = s.split("\n")
