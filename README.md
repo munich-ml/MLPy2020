@@ -93,62 +93,53 @@ versus
 - Concluding [SciKit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 # Epic 3: Neural Networks for Computer Vision with Tensorflow
-### Neural networks - ppt slides
+## Neural networks - ppt slides
 - **Layers** (input, hidden and output), weights and biases
 - Neural net training means **finding weights & biases that minimize the cost function**
 - (Error) **back propagation** modifies the weights accrding to their effect on the error
 - **Epoch** is the training over the full dataset, executed in batches
 
-- Try [TensorFlow playground](https://playground.tensorflow.org)
+Get an intuition for NN's with [TensorFlow playground](https://playground.tensorflow.org)
 
-- Neural nets in TensorFlow (`fashion_MNIST`classification problem)
+## 31_fMNIST_classifier_keras.ipynb
+- `fashion_MNIST` classification problem: 60,000 images 28x28 pixels from 10 classes
+- images as NumPy arrays. Plotting with `plt.imshow(X_train[img])`
+- **Build a model** with `keras.models.Sequential()`
+- **Compile the model** and handover `loss`, `optimizer` and `metrics`
+- **Train the model** and don't forget to chose **GPU** as hardware accelerator in Runtime 
+- mount Google Drive and save the model (`model.save()`) and the data (`picke_out()`)
 
-- evaluating a classifier
-
-- CNN intro slides
-
-- CNN in TensorFlow
-
+**to be continued**
 
 
 # Appendix
 
 ## Further reading and exercise
 - Harrison Kinsley's [PythonProgramming.net](https://pythonprogramming.net/) is a tutorials site with video & text based tutorials for Python programming.
-
 - Corey Schafer's [YouTube channel](https://www.youtube.com/user/schafer5)
-
 - [Kaggle](https://www.kaggle.com/), the data science community with datasets, notebooks, courses and competition
-
 - Michael Kennedy's [talk Python to me](https://talkpython.fm/) podcast
-
 -  Aurelien Geron _Hands-on Machine Learning with Scikit-learn, Keras & TensorFlow_ [Book on Amazon](https://www.amazon.de/Aur%C3%A9lien-G%C3%A9ron/dp/1492032646/ref=sr_1_3?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=Hands-on+Machine+Learning+with+Scikit-learn%2C+Keras+%26+TensorFlow%2C+Aurelien+Geron%2C&qid=1589875241&sr=8-3)
-
 - Andreas Mueller: _Introduction to Machine Learning with Python_ [Book on Amazon](https://www.amazon.de/Introduction-Machine-Learning-Python-Scientists/dp/1449369413)
 - Andreas Mueller: [Applied ML spring semester 2020](https://www.cs.columbia.edu/~amueller/comsw4995s20/), with videos, slides and notebooks
-
 - ...
 
 ## Progmming language popularity
 - [TOIBE popularity index](https://www.tiobe.com/tiobe-index/) ratings based on search quantities of 25 engines (Google, Baidu,.. but also Wikipedia)
-
 > 1. C
 > 2. Java
 > 3. **Python** 
 
 - [PYPL](http://pypl.github.io/) measures how often language tutorials are googled by exploring Google Trends.
-
 > 1. **Python** 
 > 2. Java
 > 3. JavaScript
 
 - [GitHub statistics](https://madnight.github.io/githut/#/pull_requests/2020/1) percentage pull-requests / commits / issues on GitHub.
-
 > 1. JavaScript
 > 2. **Python** 
 
 - [Stackoverflow survey 2019](https://insights.stackoverflow.com/survey/2019): Key result #1: *Python, the fastest-growing major programming language, has risen in the ranks of programming languages in our survey yet again, edging out Java this year and standing as the second most loved language (behind Rust).*
-
 > 1. JavaScript
 > 2. HTML/CSS
 > 3. SQL
