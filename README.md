@@ -1,9 +1,155 @@
 # Machine Learning with Python `MLPy2020`
 This repo contains Jupyter notebooks, datasets and models for the MLPy2020 tutorial. 
 
-## Naming convention of Jupyter notebooks
-|exmple|version|
-|--|--|
-|12_Logfile_challenge_**blank**.ipynb|empty version to start with|
-|12_Logfile_challenge_**dirty**.ipynb|dirty version from life session|
-|12_Logfile_challenge.ipynb|clean version published later|
+
+# Epic 1: Python basics
+
+## `12_Logfile_challenge.ipynb` 
+- `!git clone https://github.com/munich-ml/MLPy2020/` for getting `logfile.csv`
+- task: Parsing the logfile from `s`, `<type 'str'>`  
+- `lines = s.split("\n")`
+- `<type 'list'>` is iterable: `for line in lines:`
+- `<type 'dict'>` for key-value lookup, like `idxs = {'header': 2, 'measurements': 8}`
+- `<type 'set'>` for set operations like `union`, `diff`
+- 2-dim `data` became a list of lists: `data[row][col]`, that doesn't support matrix operations like element-wise multiplication or arbitrary indexing.
+
+## `15_NumPy.ipynb` 
+**NumPy** is made for matrix math and is very fast
+
+`numpy.array`
+- is the basic NumPy datatype
+- may have 1, 2 or N dimensions
+- all items have the same datatype
+- provide arbitrary indexing
+- provide element-wise operations
+
+NumPy provides various *concatanation methods*
+- `np.column_stack()` supports horizontal stacking of 2D and 1D arrays
+
+## `16_Matplotlib.ipynb` 
+For more inspiration go to [Matplotlib website](https://matplotlib.org/)
+
+`%matplotlib` magic switches between:
+- static inline plots (default) with `%matplotlib inline`
+- interactive plots with `%matplotlib qt`
+
+## `17_Pandas.ipynb` 
+**Pandas** (alias `pd`) is a Python package providing fast, flexible, and expressive data structures designed to make working with "labeled" data both easy and intuitive. 
+
+**`pd.DataFrame`** is a two-dimensional data structure with labeled axes, rows (`index`) and `column`. The data is often a `np.array`.
+
+**`pd.Series`** is the one-dimensional version of the `pd.DataFrame`.
+
+## [18_Logfiles_w_classes.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/18_Logfiles_w_classes.ipynb) 
+
+The object oriented implementation of the *logfile challenge* brings some advantages:
+
+**Functions (*methods*) and data bundled in one object**
+
+**Cleaner interfaces and namespace**, e.g. 
+> - `log = Log(fn)`
+> - `log.plot(sig_names=["sig0_cal"])`            
+
+versus
+
+> - `log_data = parse_logfile_string_to_pandas(s)`
+> - `plot(log_data, sig_names=["sig0_cal"])`
+
+**overwrite operators** like `__str__`, `__lt__`, ...
+
+# Epic 2: Machine Learning with Scikit-learn
+
+## 21_first_machine_lerning_models.ipynb
+- **Scikit-learn** offers standard interfaces to its models, e.g. `model.fit(x_train, y_train)`, `model.predict(x_new)`
+- **RSME** or *root mean squared error* used as performance criterion for the **regression problem**
+- a model is supposed to **generalize** the training data, not to **memorize** it. 
+- An **overfitting** model performs much worse *test data* than on the *training RSME*. 
+- The common root cause is **too few training data** applied to a **too complex model**.
+- **Regularization** helps to avoids overfitting of complex models.
+- An **underfitting** model performs bad on both data sets. 
+- **Linear regression model** and **Decision tree model**
+
+## 22_end2end_ml_project.ipynb
+- `housing` dataset with 10 **attributes** and 20.640 samples
+- `median_house_value` will be the *target attribute*, also called **label**. The other attributes will be the **features**
+- the `median_house_value` distribution is odd, with an obvious cap at 500.000
+- 9 attributes are **numerical**, 1 is **categorical**
+- The `total_bedrooms` feature is incomplete / has *null* values
+- next step: Split data into training and test data
+- Scikit-learn's **`train_test_split`** slits datasets randomly and reproducable into subsets (e.g. for training and testing)
+- **`StratifiedShuffleSplit`** ensures that the feature distributions are **representative** (w.r.t. a certain feature)
+- Pandas **`corr`** and **`scatter_matrix`** are useful tools for **dataset exploration**
+- **Feature combinations** can be more informative that the native features. Implemented as custom **`CombinedAttrAdder`** class
+- **Missing values** need to be handled, e.g. `dropna`, `fillna` or better Scikit-learn's **`SimpleImputer`**
+- **Categorical text features** are encoded using the **`OneHotEncoder`**
+- Features are scaled using **`StandardScaler`**. Alternatives: `MinMaxScaler`, `QuantileTransformer`
+- **Transformation pipelines** execute multiple *transformers* as an one-liner
+- Various models trained: Linear regressor, decision tree, random forest, SVM
+- **Validation dataset** used for model selection and hyperparameter tuning
+- **Cross validation** trains and validates a model k-times, each time with a differnet validation subset
+- Automized model tuning using **`GridSearchCV`** and **`RandomizedSearchCV`**. `CV` because *cross validation* is applied
+- `RandomForestRegressor` provides **`feature_importances_`** to identify the most and least important features
+- **Final test**, the first and only time, the *testset* should be used!
+- Concluding [SciKit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+
+# Epic 3: Neural Networks for Computer Vision with Tensorflow
+### Neural networks - ppt slides
+- **Layers** (input, hidden and output), weights and biases
+- Neural net training means **finding weights & biases that minimize the cost function**
+- (Error) **back propagation** modifies the weights accrding to their effect on the error
+- **Epoch** is the training over the full dataset, executed in batches
+
+- Try [TensorFlow playground](https://playground.tensorflow.org)
+
+- Neural nets in TensorFlow (`fashion_MNIST`classification problem)
+
+- evaluating a classifier
+
+- CNN intro slides
+
+- CNN in TensorFlow
+
+
+
+# Appendix
+
+## Further reading and exercise
+- Harrison Kinsley's [PythonProgramming.net](https://pythonprogramming.net/) is a tutorials site with video & text based tutorials for Python programming.
+
+- Corey Schafer's [YouTube channel](https://www.youtube.com/user/schafer5)
+
+- [Kaggle](https://www.kaggle.com/), the data science community with datasets, notebooks, courses and competition
+
+- Michael Kennedy's [talk Python to me](https://talkpython.fm/) podcast
+
+-  Aurelien Geron _Hands-on Machine Learning with Scikit-learn, Keras & TensorFlow_ [Book on Amazon](https://www.amazon.de/Aur%C3%A9lien-G%C3%A9ron/dp/1492032646/ref=sr_1_3?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=Hands-on+Machine+Learning+with+Scikit-learn%2C+Keras+%26+TensorFlow%2C+Aurelien+Geron%2C&qid=1589875241&sr=8-3)
+
+- Andreas Mueller: _Introduction to Machine Learning with Python_ [Book on Amazon](https://www.amazon.de/Introduction-Machine-Learning-Python-Scientists/dp/1449369413)
+- Andreas Mueller: [Applied ML spring semester 2020](https://www.cs.columbia.edu/~amueller/comsw4995s20/), with videos, slides and notebooks
+
+- ...
+
+## Progmming language popularity
+- [TOIBE popularity index](https://www.tiobe.com/tiobe-index/) ratings based on search quantities of 25 engines (Google, Baidu,.. but also Wikipedia)
+
+> 1. C
+> 2. Java
+> 3. **Python** 
+
+- [PYPL](http://pypl.github.io/) measures how often language tutorials are googled by exploring Google Trends.
+
+> 1. **Python** 
+> 2. Java
+> 3. JavaScript
+
+- [GitHub statistics](https://madnight.github.io/githut/#/pull_requests/2020/1) percentage pull-requests / commits / issues on GitHub.
+
+> 1. JavaScript
+> 2. **Python** 
+
+- [Stackoverflow survey 2019](https://insights.stackoverflow.com/survey/2019): Key result #1: *Python, the fastest-growing major programming language, has risen in the ranks of programming languages in our survey yet again, edging out Java this year and standing as the second most loved language (behind Rust).*
+
+> 1. JavaScript
+> 2. HTML/CSS
+> 3. SQL
+> 4. **Python** 
