@@ -1,11 +1,12 @@
 # Machine Learning with Python `MLPy2020`
 This repo contains the Jupyter notebooks, datasets and models for the **2020 "Machine Learning with Python" class** at [DHBW Friedrichshafen](https://www.ravensburg.dhbw.de/studienangebot/bachelor-studiengaenge/elektrotechnik-fahrzeugelektronik.html).
 
-## Convolutional neural networks [MLPy2020_slides.pdf p2](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
+## Wellcome to Python and Colab [MLPy2020_slides.pdf p2](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
 - running **Python** locally or in the cloud ([**Google Colab**](https://colab.research.google.com/) for this course) 
 - Python [`scripts.py`](https://www.python.org/) vs. [`jupyter_notebooks.ipynb`](https://jupyter.org/)
 
 # Epic 1: Python basics
+Parsing logfiles is a regular task for most data scientists. **Epic 1** tackles such parsing-task, the **logfile challange**. It starts with Python's basic datatypes (`str`, `list`, `dict`,..) and contineously improves the parser with by using higher level libraries (**NumPy**, **Matplotlib**, **Pandas**) and finally **classes**.  
 
 ## [12_Logfile_challenge.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/12_Logfile_challenge.ipynb)
 - `!git clone https://github.com/munich-ml/MLPy2020/` for getting `logfile.csv`
@@ -13,15 +14,14 @@ This repo contains the Jupyter notebooks, datasets and models for the **2020 "Ma
 - `lines = s.split("\n")`
 - `<type 'list'>` is iterable: `for line in lines:`
 - `<type 'dict'>` for key-value lookup, like `idxs = {'header': 2, 'measurements': 8}`
-- `<type 'set'>` for set operations like `union`, `diff`
+- `<type 'set'>` for set operations like `union` or `diff`
 - 2-dim `data` became a list of lists: `data[row][col]`, that doesn't support matrix operations like element-wise multiplication or arbitrary indexing.
 
 ## [15_NumPy.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/15_NumPy.ipynb)
-**NumPy** is made for matrix math and is very fast
+**NumPy** (alias `np`) is a Python module made for matrix math.
 
-`numpy.array`
-- is the basic NumPy datatype
-- may have 1, 2 or N dimensions
+The **`numpy.array`** is NumPy's standard datatype.
+- `numpy.array`s may have 1, 2 or N dimensions
 - all items have the same datatype
 - provide arbitrary indexing
 - provide element-wise operations
@@ -30,14 +30,14 @@ NumPy provides various *concatanation methods*
 - `np.column_stack()` supports horizontal stacking of 2D and 1D arrays
 
 ## [16_Matplotlib.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/16_Matplotlib.ipynb)
-For more inspiration go to [Matplotlib website](https://matplotlib.org/)
+For inspiration what and how to plot go to [Matplotlib website](https://matplotlib.org/)
 
-`%matplotlib` magic switches between:
+The `%matplotlib` magic switches between:
 - static inline plots (default) with `%matplotlib inline`
 - interactive plots with `%matplotlib qt`
 
 ## [17_Pandas.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/17_Pandas.ipynb) 
-**Pandas** (alias `pd`) is a Python package providing fast, flexible, and expressive data structures designed to make working with "labeled" data both easy and intuitive. 
+**Pandas** (alias `pd`) is a Python module providing fast, flexible, and expressive data structures which are designed to make working with "labeled" data both easy and intuitive. 
 
 **`pd.DataFrame`** is a two-dimensional data structure with labeled axes, rows (`index`) and `column`. The data is often a `np.array`.
 
@@ -65,50 +65,49 @@ versus
 ## [21_first_machine_lerning_models.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/21_first_machine_lerning_models.ipynb)
 - **Scikit-learn** offers standard interfaces to its models, e.g. `model.fit(x_train, y_train)`, `model.predict(x_new)`
 - **RSME** or *root mean squared error* used as performance criterion for the **regression problem**
-- a model is supposed to **generalize** the training data, not to **memorize** it. 
-- An **overfitting** model performs much worse *test data* than on the *training RSME*. 
-- The common root cause is **too few training data** applied to a **too complex model**.
-- **Regularization** helps to avoids overfitting of complex models.
-- An **underfitting** model performs bad on both data sets. 
-- **Linear regression model** and **Decision tree model**
+- a model is supposed to **generalize** the training data, not to **memorize** it
+- an **overfitting** model performs much worse on the *test data* than on the *training RSME*
+- the common root cause is **too few training data** applied to a **too complex model**
+- **Regularization** helps to avoids overfitting of complex models
+- an **underfitting** model performs bad on both data sets
+- comparison of **Linear regression model** and **Decision tree model**
 
 ## [22_end2end_ml_project.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/22_end2end_ml_project.ipynb)
 - `housing` dataset with 10 **attributes** and 20.640 samples
 - `median_house_value` will be the *target attribute*, also called **label**. The other attributes will be the **features**
-- the `median_house_value` distribution is odd, with an obvious cap at 500.000
+- the `median_house_value` distribution is odd, with an obvious cap at 500,000
 - 9 attributes are **numerical**, 1 is **categorical**
-- The `total_bedrooms` feature is incomplete / has *null* values
-- next step: Split data into training and test data
-- Scikit-learn's **`train_test_split`** slits datasets randomly and reproducable into subsets (e.g. for training and testing)
+- the `total_bedrooms` feature is incomplete, meaning it has *null* values
+- Scikit-learn's **`train_test_split`** slits datasets randomly and reproducable into subsets (e.g. for training and test)
 - **`StratifiedShuffleSplit`** ensures that the feature distributions are **representative** (w.r.t. a certain feature)
 - Pandas **`corr`** and **`scatter_matrix`** are useful tools for **dataset exploration**
-- **Feature combinations** can be more informative that the native features. Implemented as custom **`CombinedAttrAdder`** class
-- **Missing values** need to be handled, e.g. `dropna`, `fillna` or better Scikit-learn's **`SimpleImputer`**
-- **Categorical text features** are encoded using the **`OneHotEncoder`**
-- Features are scaled using **`StandardScaler`**. Alternatives: `MinMaxScaler`, `QuantileTransformer`
-- **Transformation pipelines** execute multiple *transformers* as an one-liner
-- Various models trained: Linear regressor, decision tree, random forest, SVM
-- **Validation dataset** used for model selection and hyperparameter tuning
-- **Cross validation** trains and validates a model k-times, each time with a differnet validation subset
-- Automized model tuning using **`GridSearchCV`** and **`RandomizedSearchCV`**. `CV` because *cross validation* is applied
+- **feature combinations** can be more informative that the native features. Implemented as custom **`CombinedAttrAdder`** class
+- **missing values** need to be handled, e.g. `dropna`, `fillna` or better Scikit-learn's **`SimpleImputer`**
+- **categorical text features** are encoded using the **`OneHotEncoder`**
+- features are scaled using **`StandardScaler`**. Alternatives: `MinMaxScaler`, `QuantileTransformer`
+- **transformation pipelines** execute multiple *transformers* as *one-liner*
+- various models trained: Linear regressor, decision tree, random forest, SVM
+- **validation dataset** used for model selection and hyperparameter tuning
+- **cross validation** trains and validates a model k-times, each time with a differnet validation subset
+- automized model tuning using **`GridSearchCV`** and **`RandomizedSearchCV`**. `CV` because *cross validation* is applied
 - `RandomForestRegressor` provides **`feature_importances_`** to identify the most and least important features
-- **Final test**, the first and only time, the *testset* should be used!
-- Concluding [SciKit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+- **final test** is the first and only time, the *testset* should be used!
+- concluding [SciKit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 # Epic 3: Neural Networks for Computer Vision with Tensorflow
 ## Neural networks [MLPy2020_slides.pdf p7..10](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
-- **Layers** (input, hidden and output), weights and biases
+- **layers** (input, hidden and output), weights and biases
 - neural net training means **finding weights & biases that minimize the cost function**
-- (Error) **back propagation** modifies the weights accrding to their effect on the error
-- **Epoch** is the training over the full dataset, executed in batches
+- (error) **back propagation** modifies the weights accrding to their effect on the error
+- **epoch** is the training over the full dataset, executed in batches
 - get an intuition for NN's with [TensorFlow playground](https://playground.tensorflow.org)
 
 ## [31_fMNIST_classifier_keras.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/31_fMNIST_classifier_keras.ipynb)
 - `fashion_MNIST` classification problem: 60,000 images 28x28 pixels from 10 classes
 - images as NumPy arrays. Plotting with `plt.imshow(X_train[img])`
-- **Build a model** with `keras.models.Sequential()`
-- **Compile the model** and handover `loss`, `optimizer` and `metrics`
-- **Train the model** and don't forget to chose **GPU** as hardware accelerator in Runtime 
+- **build the model** with `keras.models.Sequential()`
+- **compile the model** and handover `loss`, `optimizer` and `metrics`
+- **train the model** and don't forget to chose **GPU** as hardware accelerator in Runtime 
 - mount Google Drive and save the model (`model.save()`) and the data (`picke_out()`)
 
 ## [32_evaluate_fMNIST_classifier.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/32_evaluate_fMNIST_classifier.ipynb)
@@ -125,9 +124,9 @@ versus
 - get some intuition for CNN's with [Adam Harleys's "Interactive CNN Visualizer"](https://www.cs.ryerson.ca/~aharley/vis/conv/)
 
 ## [34_fMNIST_with_CNNs.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/34_fMNIST_with_CNNs.ipynb)
-notebook is very similar to `31_fMNIST_classifier_keras.ipynp`, except for:
+This notebook is very similar to `31_fMNIST_classifier_keras.ipynp`, except for:
 - slightly different preprocessing (scaling to std. diviation and 4dim image arrays)
-- build the model with CNN layers (`keras.layers.Conv2D` and `keras.layers.MaxPooling2D`)
+- build the model with CNN layers (e.g. `keras.layers.Conv2D` and `keras.layers.MaxPooling2D`)
 
 ## [35_batch_evaluate_fMNIST.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/35_batch_evaluate_fMNIST.ipynb)
 - mount Google Drive and search all models in `models` subdir
