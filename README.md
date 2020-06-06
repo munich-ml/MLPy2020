@@ -7,7 +7,7 @@ This repo contains the Jupyter notebooks, datasets and models for the **2020 "Ma
 
 # Epic 1: Python basics
 
-## `12_Logfile_challenge.ipynb` 
+## [12_Logfile_challenge.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/12_Logfile_challenge.ipynb)
 - `!git clone https://github.com/munich-ml/MLPy2020/` for getting `logfile.csv`
 - task: Parsing the logfile from `s`, `<type 'str'>`  
 - `lines = s.split("\n")`
@@ -16,7 +16,7 @@ This repo contains the Jupyter notebooks, datasets and models for the **2020 "Ma
 - `<type 'set'>` for set operations like `union`, `diff`
 - 2-dim `data` became a list of lists: `data[row][col]`, that doesn't support matrix operations like element-wise multiplication or arbitrary indexing.
 
-## `15_NumPy.ipynb` 
+## [15_NumPy.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/15_NumPy.ipynb)
 **NumPy** is made for matrix math and is very fast
 
 `numpy.array`
@@ -29,14 +29,14 @@ This repo contains the Jupyter notebooks, datasets and models for the **2020 "Ma
 NumPy provides various *concatanation methods*
 - `np.column_stack()` supports horizontal stacking of 2D and 1D arrays
 
-## `16_Matplotlib.ipynb` 
+## [16_Matplotlib.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/16_Matplotlib.ipynb)
 For more inspiration go to [Matplotlib website](https://matplotlib.org/)
 
 `%matplotlib` magic switches between:
 - static inline plots (default) with `%matplotlib inline`
 - interactive plots with `%matplotlib qt`
 
-## `17_Pandas.ipynb` 
+## [17_Pandas.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/17_Pandas.ipynb) 
 **Pandas** (alias `pd`) is a Python package providing fast, flexible, and expressive data structures designed to make working with "labeled" data both easy and intuitive. 
 
 **`pd.DataFrame`** is a two-dimensional data structure with labeled axes, rows (`index`) and `column`. The data is often a `np.array`.
@@ -62,7 +62,7 @@ versus
 
 # Epic 2: Machine Learning with Scikit-learn
 
-## 21_first_machine_lerning_models.ipynb
+## [21_first_machine_lerning_models.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/21_first_machine_lerning_models.ipynb)
 - **Scikit-learn** offers standard interfaces to its models, e.g. `model.fit(x_train, y_train)`, `model.predict(x_new)`
 - **RSME** or *root mean squared error* used as performance criterion for the **regression problem**
 - a model is supposed to **generalize** the training data, not to **memorize** it. 
@@ -72,7 +72,7 @@ versus
 - An **underfitting** model performs bad on both data sets. 
 - **Linear regression model** and **Decision tree model**
 
-## 22_end2end_ml_project.ipynb
+## [22_end2end_ml_project.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/22_end2end_ml_project.ipynb)
 - `housing` dataset with 10 **attributes** and 20.640 samples
 - `median_house_value` will be the *target attribute*, also called **label**. The other attributes will be the **features**
 - the `median_house_value` distribution is odd, with an obvious cap at 500.000
@@ -103,7 +103,7 @@ versus
 - **Epoch** is the training over the full dataset, executed in batches
 - get an intuition for NN's with [TensorFlow playground](https://playground.tensorflow.org)
 
-## 31_fMNIST_classifier_keras.ipynb
+## [31_fMNIST_classifier_keras.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/31_fMNIST_classifier_keras.ipynb)
 - `fashion_MNIST` classification problem: 60,000 images 28x28 pixels from 10 classes
 - images as NumPy arrays. Plotting with `plt.imshow(X_train[img])`
 - **Build a model** with `keras.models.Sequential()`
@@ -111,7 +111,7 @@ versus
 - **Train the model** and don't forget to chose **GPU** as hardware accelerator in Runtime 
 - mount Google Drive and save the model (`model.save()`) and the data (`picke_out()`)
 
-## 32_evaluate_fMNIST_classifier.ipynb
+## [32_evaluate_fMNIST_classifier.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/32_evaluate_fMNIST_classifier.ipynb)
 - load the model from Google Drive `keras.models.load_model()`
 - predict instances from the *validation data set*
 - **confusion matrix** `tf.math.confusion_matrix`, and how to plot it
@@ -124,12 +124,12 @@ versus
 - lower layers learn basic shapes, while higher layers learn more complete objects (**hint to transfer learning**)
 - get some intuition for CNN's with [Adam Harleys's "Interactive CNN Visualizer"](https://www.cs.ryerson.ca/~aharley/vis/conv/)
 
-## 34_fMNIST_with_CNNs.ipynb
+## [34_fMNIST_with_CNNs.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/34_fMNIST_with_CNNs.ipynb)
 notebook is very similar to `31_fMNIST_classifier_keras.ipynp`, except for:
 - slightly different preprocessing (scaling to std. diviation and 4dim image arrays)
 - build the model with CNN layers (`keras.layers.Conv2D` and `keras.layers.MaxPooling2D`)
 
-## 35_batch_evaluate_fMNIST.ipynb
+## [35_batch_evaluate_fMNIST.ipynb](https://colab.research.google.com/github/munich-ml/MLPy2020/blob/master/35_batch_evaluate_fMNIST.ipynb)
 - mount Google Drive and search all models in `models` subdir
 - benchmark all models w.r.t. **accuracy** and **execution time**
 - **concluding CNNs** (e.g. for MNIST the CNNs don't benefit from their position independency)
