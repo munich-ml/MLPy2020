@@ -1,5 +1,5 @@
 # Machine Learning with Python
-This repo contains the Jupyter notebooks, datasets and models for the **2020 "Machine Learning with Python" class** at [DHBW Friedrichshafen](https://www.ravensburg.dhbw.de/studienangebot/bachelor-studiengaenge/elektrotechnik-fahrzeugelektronik.html).
+The [MLPy2020 repo](https://github.com/munich-ml/MLPy2020) contains the Jupyter notebooks, datasets and models for the **2020 "Machine Learning with Python" class** at [DHBW Friedrichshafen](https://www.ravensburg.dhbw.de/studienangebot/bachelor-studiengaenge/elektrotechnik-fahrzeugelektronik.html).
 
 ## Wellcome to Python and Colab [MLPy2020_slides.pdf p2](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
 - running **Python** locally or in the cloud ([**Google Colab**](https://colab.research.google.com/) for this course) 
