@@ -1,6 +1,9 @@
 # Machine Learning with Python `MLPy2020`
-This repo contains Jupyter notebooks, datasets and models for the MLPy2020 tutorial. 
+This repo contains the Jupyter notebooks, datasets and models for **2020 "Machine Learning with Python" class** at [DHBW Friedrichshafen](https://www.ravensburg.dhbw.de/studienangebot/bachelor-studiengaenge/elektrotechnik-fahrzeugelektronik.html).
 
+## Convolutional neural networks [MLPy2020_slides.pdf p2](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
+- running **Python** locally or in the cloud ([**Google Colab**](https://colab.research.google.com/) for this course) 
+- Python [`scripts.py`](https://www.python.org/) vs. [`jupyter_notebooks.ipynb`](https://jupyter.org/)
 
 # Epic 1: Python basics
 
@@ -93,13 +96,12 @@ versus
 - Concluding [SciKit-learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 # Epic 3: Neural Networks for Computer Vision with Tensorflow
-## Neural networks - ppt slides
+## Neural networks [MLPy2020_slides.pdf p7..10](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
 - **Layers** (input, hidden and output), weights and biases
-- Neural net training means **finding weights & biases that minimize the cost function**
+- neural net training means **finding weights & biases that minimize the cost function**
 - (Error) **back propagation** modifies the weights accrding to their effect on the error
 - **Epoch** is the training over the full dataset, executed in batches
-
-Get an intuition for NN's with [TensorFlow playground](https://playground.tensorflow.org)
+- get an intuition for NN's with [TensorFlow playground](https://playground.tensorflow.org)
 
 ## 31_fMNIST_classifier_keras.ipynb
 - `fashion_MNIST` classification problem: 60,000 images 28x28 pixels from 10 classes
@@ -109,7 +111,19 @@ Get an intuition for NN's with [TensorFlow playground](https://playground.tensor
 - **Train the model** and don't forget to chose **GPU** as hardware accelerator in Runtime 
 - mount Google Drive and save the model (`model.save()`) and the data (`picke_out()`)
 
-**to be continued**
+## 32_evaluate_fMNIST_classifier.ipynb
+- load the model from Google Drive `keras.models.load_model()`
+- predict instances from the *validation data set*
+- **confusion matrix** `tf.math.confusion_matrix`, and how to plot it
+- performance measures for *classifiers*, *accuracy*, *precision, recall*, *F1-score*
+- discussion of prediction examples, in particular `false_pos`'s and `false_neg`'s
+
+## Convolutional neural networks [MLPy2020_slides.pdf p11..13](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
+- disadvantages of **dense neural networks** for **computer vision** (scaleability, prone to overfitting, semantic neighborhood, position dependence)
+- CNN layer types (convolutional layers, pooling layers, dense layers)
+- lower layers learn basic shapes, while higher layers learn more complete objects (**hint to transfer learning**)
+- get some intuition for CNN's with [Adam Harleys's "Interactive CNN Visualizer"](https://www.cs.ryerson.ca/~aharley/vis/conv/)
+
 
 
 # Appendix
