@@ -1,5 +1,5 @@
 # Machine Learning with Python `MLPy2020`
-This repo contains the Jupyter notebooks, datasets and models for **2020 "Machine Learning with Python" class** at [DHBW Friedrichshafen](https://www.ravensburg.dhbw.de/studienangebot/bachelor-studiengaenge/elektrotechnik-fahrzeugelektronik.html).
+This repo contains the Jupyter notebooks, datasets and models for the **2020 "Machine Learning with Python" class** at [DHBW Friedrichshafen](https://www.ravensburg.dhbw.de/studienangebot/bachelor-studiengaenge/elektrotechnik-fahrzeugelektronik.html).
 
 ## Convolutional neural networks [MLPy2020_slides.pdf p2](https://github.com/munich-ml/MLPy2020/blob/master/MLPy2020_slides.pdf)
 - running **Python** locally or in the cloud ([**Google Colab**](https://colab.research.google.com/) for this course) 
@@ -124,19 +124,17 @@ versus
 - lower layers learn basic shapes, while higher layers learn more complete objects (**hint to transfer learning**)
 - get some intuition for CNN's with [Adam Harleys's "Interactive CNN Visualizer"](https://www.cs.ryerson.ca/~aharley/vis/conv/)
 
+## 34_fMNIST_with_CNNs.ipynb
+notebook is very similar to `31_fMNIST_classifier_keras.ipynp`, except for:
+- slightly different preprocessing (scaling to std. diviation and 4dim image arrays)
+- build the model with CNN layers (`keras.layers.Conv2D` and `keras.layers.MaxPooling2D`)
 
+## 35_batch_evaluate_fMNIST.ipynb
+- mount Google Drive and search all models in `models` subdir
+- benchmark all models w.r.t. **accuracy** and **execution time**
+- **concluding CNNs** (e.g. for MNIST the CNNs don't benefit from their position independency)
 
 # Appendix
-
-## Further reading and exercise
-- Harrison Kinsley's [PythonProgramming.net](https://pythonprogramming.net/) is a tutorials site with video & text based tutorials for Python programming.
-- Corey Schafer's [YouTube channel](https://www.youtube.com/user/schafer5)
-- [Kaggle](https://www.kaggle.com/), the data science community with datasets, notebooks, courses and competition
-- Michael Kennedy's [talk Python to me](https://talkpython.fm/) podcast
--  Aurelien Geron _Hands-on Machine Learning with Scikit-learn, Keras & TensorFlow_ [Book on Amazon](https://www.amazon.de/Aur%C3%A9lien-G%C3%A9ron/dp/1492032646/ref=sr_1_3?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=Hands-on+Machine+Learning+with+Scikit-learn%2C+Keras+%26+TensorFlow%2C+Aurelien+Geron%2C&qid=1589875241&sr=8-3)
-- Andreas Mueller: _Introduction to Machine Learning with Python_ [Book on Amazon](https://www.amazon.de/Introduction-Machine-Learning-Python-Scientists/dp/1449369413)
-- Andreas Mueller: [Applied ML spring semester 2020](https://www.cs.columbia.edu/~amueller/comsw4995s20/), with videos, slides and notebooks
-- ...
 
 ## Progmming language popularity
 - [TOIBE popularity index](https://www.tiobe.com/tiobe-index/) ratings based on search quantities of 25 engines (Google, Baidu,.. but also Wikipedia)
@@ -158,3 +156,12 @@ versus
 > 2. HTML/CSS
 > 3. SQL
 > 4. **Python** 
+
+## Further reading and exercise
+- Harrison Kinsley's [PythonProgramming.net](https://pythonprogramming.net/) is a tutorials site with video & text based tutorials for Python programming.
+- Corey Schafer's [YouTube channel](https://www.youtube.com/user/schafer5)
+- [Kaggle](https://www.kaggle.com/), the data science community with datasets, notebooks, courses and competition
+- Michael Kennedy's [talk Python to me](https://talkpython.fm/) podcast
+-  Aurelien Geron _Hands-on Machine Learning with Scikit-learn, Keras & TensorFlow_ [Book on Amazon](https://www.amazon.de/Aur%C3%A9lien-G%C3%A9ron/dp/1492032646/ref=sr_1_3?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=Hands-on+Machine+Learning+with+Scikit-learn%2C+Keras+%26+TensorFlow%2C+Aurelien+Geron%2C&qid=1589875241&sr=8-3)
+- Andreas Mueller: _Introduction to Machine Learning with Python_ [Book on Amazon](https://www.amazon.de/Introduction-Machine-Learning-Python-Scientists/dp/1449369413)
+- Andreas Mueller: [Applied ML spring semester 2020](https://www.cs.columbia.edu/~amueller/comsw4995s20/), with videos, slides and notebooks
